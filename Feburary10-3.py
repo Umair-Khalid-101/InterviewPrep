@@ -1,8 +1,14 @@
-# Count Odd Numbers in an Interval Range
-# Given two non-negative integers low and high. Return the count of odd numbers between low and high (inclusive).
+# Average Salary Excluding the Minimum and Maximum Salary
+# You are given an array of unique integers salary where salary[i] is the salary of the ith employee.
 
-def numberOfOdd(a,b):
-  print(a)
-  print(b)
+def average(salary):
+    salary.remove(max(salary))
+    salary.remove(min(salary))
+    a = len(salary)
+    total = 0
+    for i in range(a):
+      total = total + salary[i]
+    return total/a
 
-print(numberOfOdd(3,7))
+salary = [4000,7000,1000,9000]
+print("Average of Salries excluding Max Salary and Min Salary is: ",average(salary))
