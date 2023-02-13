@@ -2,10 +2,12 @@
 # You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
 def my_function(nums,target):
-  print("Hello from a function")
-  print(nums)
-  print(target)
+  for i in range(len(nums)):
+    for j in range(i+1,len(nums)):
+      if nums[j] == target - nums[i]:
+        return print([i,j])
+    
 
-nums = [2,3,4]
+nums = [3,2,4]
 target = 6
 my_function(nums,target)
