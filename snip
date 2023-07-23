@@ -1,0 +1,44 @@
+// Here is an example of how to listen for changes in a
+// MongoDB database from a Node.js server using Mongoose:
+// Require mongoose module
+
+const mongoose = require("mongoose");
+
+// Connect to MongoDB
+mongoose.connect("mongodb://localhost/mydb");
+
+// Define a schema
+const UserSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
+});
+
+// Compile schema to model
+const User = mongoose.model("User", UserSchema);
+
+// Listen for 'change' events on the model
+User.on("change", (change) => {
+  console.log(change); // prints changelog whenever a change occurs
+});
+
+// You can also listen for more specific event types
+User.on("save", (doc) => {
+  console.log("A document was saved: ", doc);
+});
+
+User.on("update", (change) => {
+  console.log("A document was updated: ", change);
+});
+
+// Example document update that will trigger the events
+const user = new User({ name: "John", age: 28 });
+user.save();
+user.update({ age: 29 });
+
+// The key points are:
+
+// Use Mongoose hooks and events like 'save', 'update', 'find', etc.
+// The 'change' event will trigger on any change.
+// Access the updated document through the callback parameters.
+// Put your change handler logic inside the callback functions.
+// So Mongoose provides a straightforward way to listen for changes on a model from a Node.js server.
